@@ -2,12 +2,14 @@
 #![allow(unused_imports)]
 
 mod day1;
+mod day2;
 
 use std::env;
 use std::fs;
 use std::str;
 
 use crate::day1::Day1;
+use crate::day2::Day2;
 
 trait AocDay {
     fn day(&self) -> i32;
@@ -27,7 +29,7 @@ fn read_lines(name: String) -> Vec<String> {
 fn main() {
     let mut days: Vec<Box<dyn AocDay>> = Vec::new();
     days.push(Box::new(Day1::new()));
-    //days.push(Box::new(Day2::new()));
+    days.push(Box::new(Day2::new()));
 
     for day in days.iter_mut() {
         let day_num = day.day();
