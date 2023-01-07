@@ -21,7 +21,10 @@ impl AocDay for Day2 {
     fn init(&mut self, input: &Vec<String>) {
         let mut rounds_vec = Vec::new();
         for val in input.clone() {
-            let round = parse_round(val);
+            let split: Vec<&str> = val.split(" ").collect();
+            let op = parse_move(split[0]).unwrap();
+            let me = parse_move(split[1]).unwrap();
+            let round = Round { op, me };
             rounds_vec.push(round);
         }
         self.input = Some(rounds_vec);
@@ -70,15 +73,8 @@ struct Round {
     me: Move,
 }
 
-fn parse_round(str: String) -> Round {
-    let split: Vec<&str> = str.split(" ").collect();
-    let op = parse_move(split[0]).unwrap();
-    let me = parse_move(split[1]).unwrap();
-    return Round { op, me };
-}
-
 fn parse_move(move_str: &str) -> Result<Move, &str> {
-    return match move_str {
+    match move_str {
         "A" | "X" => Ok(Move::ROCK),
         "B" | "Y" => Ok(Move::PAPER),
         "C" | "Z" => Ok(Move::SCISSORS),
@@ -87,7 +83,7 @@ fn parse_move(move_str: &str) -> Result<Move, &str> {
 }
 
 fn move_to_result(_move: Move) -> WinLose {
-    return match _move {
+    match _move {
         Move::ROCK => WinLose::LOST,
         Move::PAPER => WinLose::TIED,
         Move::SCISSORS => WinLose::WON,
@@ -95,7 +91,7 @@ fn move_to_result(_move: Move) -> WinLose {
 }
 
 fn get_move(op: Move, result: WinLose) -> Option<Move> {
-    return match (op, result) {
+    match (op, result) {
         (n, WinLose::TIED) => Some(n),
         (Move::ROCK, WinLose::LOST) => Some(Move::SCISSORS),
         (Move::ROCK, WinLose::WON) => Some(Move::PAPER),
@@ -107,7 +103,7 @@ fn get_move(op: Move, result: WinLose) -> Option<Move> {
 }
 
 fn score_round(round: Round) -> WinLose {
-    return match round {
+    match round {
         Round { op: Move::ROCK, me: Move::ROCK } => WinLose::TIED,
         Round { op: Move::ROCK, me: Move::PAPER } => WinLose::WON,
         Round { op: Move::ROCK, me: Move::SCISSORS } => WinLose::LOST,
