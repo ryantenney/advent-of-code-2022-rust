@@ -5,6 +5,7 @@ mod day1;
 mod day2;
 mod day3;
 mod day4;
+mod day5;
 
 use std::env;
 use std::fs;
@@ -27,13 +28,14 @@ fn read_lines(name: String) -> Vec<String> {
 }
 
 fn main() {
-    let run_day = -1;
+    let run_day = 5;
 
     let mut days: Vec<Box<dyn AocDay>> = Vec::new();
     days.push(Box::new(day1::Day1::new()));
     days.push(Box::new(day2::Day2::new()));
     days.push(Box::new(day3::Day3::new()));
     days.push(Box::new(day4::Day4::new()));
+    days.push(Box::new(day5::Day5::new()));
 
     for day in days.iter_mut() {
         let day_num = day.day();
