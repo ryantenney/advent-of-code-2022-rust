@@ -14,11 +14,16 @@ impl Day6 {
 
     fn find(&self, len: usize) -> String {
         let msg: Vec<char> = self.message.as_ref().unwrap().chars().collect();
-        for i in 0 .. msg.len() - len {
-            let set: HashSet<&char> = HashSet::from_iter(msg[i .. i + len].iter());
-            if set.len() == len {
-                return (i + len).to_string();
+        let mut tmp: Vec<char> = Vec::with_capacity(len);
+        'next: for i in len .. msg.len() {
+            msg[i - len .. i].clone_into(&mut tmp);
+            tmp.sort();
+            for j in 1 .. len {
+                if tmp[j - 1] == tmp[j] {
+                    continue 'next;
+                }
             }
+            return i.to_string();
         }
         "NOTFOUND".to_string()
     }
