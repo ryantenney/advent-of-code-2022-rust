@@ -1,7 +1,7 @@
 use std::collections::{HashSet, VecDeque};
 use std::fmt::Display;
-use std::ptr::null;
 
+use lazy_static::lazy_static;
 use regex::Regex;
 
 use crate::AocDay;
