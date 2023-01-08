@@ -4,15 +4,12 @@
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 use std::env;
 use std::fs;
 use std::str;
 use std::time::Instant;
-
-use crate::day1::Day1;
-use crate::day2::Day2;
-use crate::day3::Day3;
 
 trait AocDay {
     fn day(&self) -> i32;
@@ -33,9 +30,10 @@ fn main() {
     let run_day = -1;
 
     let mut days: Vec<Box<dyn AocDay>> = Vec::new();
-    days.push(Box::new(Day1::new()));
-    days.push(Box::new(Day2::new()));
-    days.push(Box::new(Day3::new()));
+    days.push(Box::new(day1::Day1::new()));
+    days.push(Box::new(day2::Day2::new()));
+    days.push(Box::new(day3::Day3::new()));
+    days.push(Box::new(day4::Day4::new()));
 
     for day in days.iter_mut() {
         let day_num = day.day();
