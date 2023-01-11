@@ -7,6 +7,8 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day9;
+mod parser;
 
 use std::env;
 use std::fs;
@@ -38,6 +40,7 @@ fn main() {
     days.push(Box::new(day4::Day4::new()));
     days.push(Box::new(day5::Day5::new()));
     days.push(Box::new(day6::Day6::new()));
+    days.push(Box::new(day9::Day9::new()));
 
     for day in days.iter_mut() {
         let day_num = day.day();
